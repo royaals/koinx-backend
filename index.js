@@ -10,13 +10,13 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Connect to MongoDB
+
 connectDB();
 
-// Middleware
+
 app.use(cors());
 app.use(express.json());
-// Swagger UI
+
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     explorer: true,
     customCss: '.swagger-ui .topbar { display: none }',
@@ -26,7 +26,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
     },
 }));
 
-// Routes
 app.use('/', cryptoRoutes);
 
 // Schedule background job (every 2 hours)
@@ -35,7 +34,7 @@ cron.schedule('0 */2 * * *', () => {
     CryptoService.fetchAndStoreCryptoData();
 });
 
-// Initial fetch when server starts
+
 CryptoService.fetchAndStoreCryptoData();
 
 app.listen(PORT, () => {

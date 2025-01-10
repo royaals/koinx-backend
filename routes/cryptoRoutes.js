@@ -1,4 +1,4 @@
-// routes/cryptoRoutes.js
+
 
 const express = require("express");
 const router = express.Router();
@@ -224,7 +224,7 @@ router.get("/supported-coins", (req, res) => {
   });
 });
 
-// Error handling middleware
+
 router.use((err, req, res, next) => {
   console.error("Route Error:", err);
   res.status(500).json({
